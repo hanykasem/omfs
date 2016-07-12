@@ -1,8 +1,8 @@
 {% if all_patients %}
-
+    <h3>OMFS Case Record Platform</h3>
     <ul>
         {% for patient in all_patients %}
-        <li><a href="/records/{{ record.id }}/">{{ patient.name }}</a></li>
+        <li><a href="/records/{{ patient.id }}/">{{ patient.name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
