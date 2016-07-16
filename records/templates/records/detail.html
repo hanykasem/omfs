@@ -1,13 +1,19 @@
-<h1>Patient Details:</h1>
-<h3>Name: {{ patient.name }}</h3>
-<p>PID: {{ patient.pid }}</p>
-<p>DOB: {{ patient.date_of_birth }}</p>
-<br />
-<p>Medical History: {{patient.medical_history }}</p>
-<p>{{ patient.presentation_date }} - {{ patient.presentation }}</p>
+{% extends 'records/base.html' %}
 
-<ul>
-    {% for visit in patient.visit_set.all %}
-    <li>{{ visit.visit_date }} - {{ visit.visit_note }}</li>
-    {% endfor %}
-</ul>
+{% block title %}Patient details{% endblock %}
+
+{% block body %}
+    <h1>Patient Details:</h1>
+    <h3>Name: {{ patient.name }}</h3>
+    <p>PID: {{ patient.pid }}</p>
+    <p>DOB: {{ patient.date_of_birth }}</p>
+    <br />
+    <p>Medical History: {{patient.medical_history }}</p>
+    <p>{{ patient.presentation_date }} - {{ patient.presentation }}</p>
+
+    <ul>
+        {% for visit in patient.visit_set.all %}
+        <li>{{ visit.visit_date }} - {{ visit.visit_note }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

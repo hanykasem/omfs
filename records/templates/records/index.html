@@ -1,46 +1,14 @@
-{% load staticfiles %}
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="{% static 'records/style.css' %}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% extends 'records/base.html' %}
 
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-
-        <!-- Header -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'records:index' %}">OMFS Case Records</a>
-        </div>
-
-        <!-- Items -->
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="">
-                    <a href="{% url 'records:index' %}">
-                        <span class="glyicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
-                        New Case
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
-{% if all_patients %}
-    <h3>OMFS Case Record Platform</h3>
-    <ul>
-        {% for patient in all_patients %}
-        <li><a href="{% url 'records:detail' patient.id %}">{{ patient.name }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <h3>You don't have any Patient Records.</h3>
-{% endif %}
+{% block body %}
+    {% if all_patients %}
+        <h3>OMFS Case Record Platform</h3>
+        <ul>
+            {% for patient in all_patients %}
+            <li><a href="{% url 'records:detail' patient.id %}">{{ patient.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>You don't have any Patient Records.</h3>
+    {% endif %}
+{% endblock %}
