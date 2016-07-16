@@ -1,19 +1,43 @@
 {% extends 'records/base.html' %}
-
-{% block title %}Patient details{% endblock %}
+{% block title %}{{ patient }}{% endblock %}
 
 {% block body %}
-    <h1>Patient Details:</h1>
-    <h3>Name: {{ patient.name }}</h3>
-    <p>PID: {{ patient.pid }}</p>
-    <p>DOB: {{ patient.date_of_birth }}</p>
-    <br />
-    <p>Medical History: {{patient.medical_history }}</p>
-    <p>{{ patient.presentation_date }} - {{ patient.presentation }}</p>
+<div class="container-fluid songs-container">
 
-    <ul>
-        {% for visit in patient.visit_set.all %}
-        <li>{{ visit.visit_date }} - {{ visit.visit_note }}</li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+
+        <!-- Left Patient Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>{{ patient.name }} <small>{{ patient.pid }}</small></h3>
+                    <h4>{{ patient.date_of_birth }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Patient Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="#">View All</a></li>
+                <li role="presentation"><a href="#">Add New Visit</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <p>Medical History: {{patient.medical_history }}</p>
+                    <p><strong>{{ patient.presentation_date }}:</strong> {{ patient.presentation }}</p>
+                    {% for visit in patient.visit_set.all %}
+                        <p><strong>{{ visit.visit_date }}:</strong> {{ visit.visit_note }}</p>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

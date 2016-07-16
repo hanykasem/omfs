@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Patient(models.Model):
     name = models.CharField(max_length=200)
@@ -7,6 +8,9 @@ class Patient(models.Model):
     medical_history = models.TextField()
     presentation_date = models.DateField()
     presentation = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('records:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

@@ -1,10 +1,18 @@
-from django.shortcuts import render, get_object_or_404
+from django.views import generic
+from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Patient
 
-def index(request):
-    all_patients = Patient.objects.all()
-    return render(request, 'records/index.html', {'all_patients': all_patients})
+class IndexView(generic.ListView):
+    template_name = 'records/index.html'
+    context_object_name = 'all_patients'
 
-def detail(request, patient_id):
-    patient = get_object_or_404(Patient, pk=patient_id)
-    return render(request, 'records/detail.html', {'patient': patient})
+    def get_queryset(self):
+        return Patient.objects.all()
+
+class DetailView(generic.DetailView):
+    model = Patient
+    template_name = 'records/detail.html'
+
+class PatientCreate(CreateView):
+    model = Patient
+    fields = ['name', 'pid', 'date_of_birth', 'medical_history', 'presentation_date', 'presentation']

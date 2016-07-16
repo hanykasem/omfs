@@ -1,0 +1,19 @@
+{% extends 'records/base.html' %}
+
+{% block body %}
+    {% if all_patients %}
+        <h3>OMFS Case Record Platform</h3>
+        <ul>
+            {% for patient in all_patients %}
+            <li>
+                <h3><a href="{% url 'records:detail' patient.id %}">{{ patient.name }}</a></h3>
+                <h4>{{ patient.pid }}</h4>
+                <p>{{ patient.presentation_date }}</p>
+                <p>{{ patient.presentation|truncatechars:200 }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>You don't have any Patient Records.</h3>
+    {% endif %}
+{% endblock %}
