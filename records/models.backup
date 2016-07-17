@@ -20,10 +20,7 @@ class Visit(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     visit_date = models.DateField()
     visit_note = models.TextField()
+    visit_image = models.CharField(max_length=1000)
 
     def __str__(self):
         return str(self.visit_date)
-
-class Image(models.Model):
-    visit = models.ForeignKey(Visit, on_delete=models.CASCADE)
-    image = models.FileField()
